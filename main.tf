@@ -34,7 +34,7 @@ data "aws_ami" "ubuntu" {
         instance_type       =       "t2.micro"
 
         tags = {
-            Name = "ImportedFromVCS"
+            Name = "CreatedViaImport"
             ttl = "400"
             owner = "Jon"
         }
