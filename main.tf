@@ -35,5 +35,7 @@ data "aws_ami" "ubuntu" {
 
         tags = {
             Name = "ImportedFromVCS"
+            ttl = "400"
+            owner = "Jon"
         }
     }
