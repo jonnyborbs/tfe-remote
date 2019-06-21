@@ -34,7 +34,7 @@ data "aws_ami" "ubuntu" {
         instance_type       =       "t2.micro"
 
         tags = {
-            XXXName = "CreatedViaImport"
+            X-XXName = "CreatedViaImport"
             ttl = "400"
             owner = "Jon"
         }
