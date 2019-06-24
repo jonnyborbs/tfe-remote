@@ -4,7 +4,7 @@ terraform {
     organization = "jschulman"
 
     workspaces {
-      name = "imported-vcs-app"
+      name = "git-backed-demo"
 
     }
   }
