@@ -34,7 +34,7 @@ data "aws_ami" "ubuntu" {
         instance_type       =       "t2.micro"
 
         tags = {
-            AppName = "VCS-Import"
+            AppName = "git-backed-demo"
             AppOwner = "Jon"
             CostCenter = "TFE-PM-000"
         }
