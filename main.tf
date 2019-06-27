@@ -39,6 +39,6 @@ data "aws_ami" "ubuntu" {
         tags = {
             AppName = "TFE-Remote"
             AppOwner = "Jon"
-            CostCenter = "TFE-PM-000"
+            CostCenter = "TFE-PM-001"
         }
     }
