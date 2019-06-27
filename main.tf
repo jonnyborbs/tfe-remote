@@ -4,15 +4,35 @@ terraform {
     organization = "jschulman"
 
     workspaces {
-      name = "git-backed-demo"
+      name = "tfe-remote"
 
     }
   }
 }
+
 provider "aws" {
     version = "~> 2.0"
 }
 
+resource "aws_security_group" "default" {
+  name        = "TFAllowSSH"
+  description = "Allow inbound SSH"
+  vpc_id      = "${aws_vpc.default.id}"
+
+  ingress {
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+}
 data "aws_ami" "ubuntu" {
     most_recent = true
 
@@ -30,11 +50,13 @@ data "aws_ami" "ubuntu" {
 }
 
     resource "aws_instance" "web" {
-        ami                 =       "${data.aws_ami.ubuntu.id}"
-        instance_type       =       "t2.micro"
+        ami                     =       "${data.aws_ami.ubuntu.id}"
+        instance_type           =       "t2.micro"
+        key_name                =       "${var.key_pair_name}"
+        vpc_security_group_ids  =       ["${aws_vpc.default.id}"]
 
         tags = {
-            AppName = "git-backed-demo"
+            AppName = "TFE-Remote"
             AppOwner = "Jon"
             CostCenter = "TFE-PM-000"
         }
